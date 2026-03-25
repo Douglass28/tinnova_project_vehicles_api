@@ -1,4 +1,4 @@
-package tinnova.test.com.example.demo.application.persistence.vehicles;
+package tinnova.test.com.example.demo.application.persistence.vehicles.enums;
 
 public enum VehicleStatus {
 	ACTIVE,

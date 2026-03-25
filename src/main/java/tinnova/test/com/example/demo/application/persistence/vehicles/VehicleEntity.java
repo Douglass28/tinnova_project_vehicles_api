@@ -34,12 +34,12 @@ public class VehicleEntity {
 
 	@NotBlank
 	@Size(max = 17)
-	@Column(nullable = false, unique = true, length = 17)
+	@Column(unique = true, length = 17)
 	private String chassis;
 
 	@NotBlank
 	@Size(max = 10)
-	@Column(nullable = false, unique = true, length = 10)
+	@Column(nullable = false, unique = true, length = 8)
 	private String plate;
 
 	@NotBlank
