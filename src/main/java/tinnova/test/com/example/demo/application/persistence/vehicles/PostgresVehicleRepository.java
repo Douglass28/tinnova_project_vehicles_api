@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import tinnova.test.com.example.demo.domain.repository.DomainVehicleRepository;
 import tinnova.test.com.example.demo.domain.entities.vehicle.Vehicle;
 import tinnova.test.com.example.demo.application.usecases.vehicle.create.VehicleMapper;
+import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
@@ -18,6 +19,11 @@ public class PostgresVehicleRepository implements DomainVehicleRepository {
         VehicleEntity entity = vehicleMapper.toEntity(vehicle);
         VehicleEntity savedEntity = vehicleRepository.save(entity);
         return vehicleMapper.toDomain(savedEntity);
+    }
+
+    @Override
+    public List<Vehicle> findAll() {
+        return vehicleMapper.toDomainList(vehicleRepository.findAll());
     }
 
 }

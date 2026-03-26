@@ -5,6 +5,7 @@ import tinnova.test.com.example.demo.domain.entities.vehicle.Vehicle;
 import tinnova.test.com.example.demo.application.persistence.vehicles.VehicleEntity;
 import org.springframework.stereotype.Component;
 import lombok.RequiredArgsConstructor;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -39,5 +40,9 @@ public class VehicleMapper {
             .type(entity.getType())
             .build();
         return Vehicle.rebuild(entity.getId(), entity.getCreatedAt(), entity.getUpdatedAt(), vehicleData);
+    }
+
+    public List<Vehicle> toDomainList(List<VehicleEntity> entities) {
+        return entities.stream().map(this::toDomain).toList();
     }
 }
