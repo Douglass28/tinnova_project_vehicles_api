@@ -19,8 +19,6 @@ public class OutputMapper {
             .price(vehicle.getPrice())
             .type(vehicle.getType())
             .status(vehicle.getStatus())
-            .createdAt(vehicle.getCreatedAt())
-            .updatedAt(vehicle.getUpdatedAt())
             .build();
     }
 

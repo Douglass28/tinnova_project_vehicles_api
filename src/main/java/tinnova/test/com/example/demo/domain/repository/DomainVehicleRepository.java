@@ -6,5 +6,6 @@ import java.util.List;
 public interface DomainVehicleRepository {
     
     Vehicle save(Vehicle vehicle);
+    
     List<Vehicle> findAll();
 }
