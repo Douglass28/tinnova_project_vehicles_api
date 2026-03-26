@@ -21,6 +21,7 @@ import tinnova.test.com.example.demo.application.usecases.vehicle.create.CreateV
 import tinnova.test.com.example.demo.application.usecases.vehicle.retrievebyfilters.RetrieveVehicleByFiltersResponse;
 import tinnova.test.com.example.demo.application.usecases.vehicle.retrievebyid.RetrieveVehicleByIdResponse;
 import tinnova.test.com.example.demo.application.usecases.vehicle.patch.PatchVehicleRequest;
+import tinnova.test.com.example.demo.application.usecases.vehicle.reportbybrand.RetrieveVehiclesByBrandReportResponse;
 import tinnova.test.com.example.demo.application.usecases.vehicle.update.UpdateVehicleRequest;
 import tinnova.test.com.example.demo.application.usecases.vehicle.update.UpdateVehicleResponse;
 
@@ -47,6 +48,14 @@ public interface VehicleApi {
     @GetMapping("/veiculos/{id}")
     @ResponseStatus(HttpStatus.OK)
     ResponseEntity<RetrieveVehicleByIdResponse> retrieveVehicleById(@PathVariable UUID id);
+
+    @Operation(
+        summary = "Relatório por marca",
+        description = "Retorna a quantidade de veículos ativos agrupada por marca (status DELETED não é contabilizado)"
+    )
+    @GetMapping("/veiculos/relatorios/por-marca")
+    @ResponseStatus(HttpStatus.OK)
+    ResponseEntity<List<RetrieveVehiclesByBrandReportResponse>> retrieveVehiclesByBrandReport();
 
     @Operation(summary = "Atualizar veículo", description = "Atualiza os dados de um veículo existente")
     @PutMapping("/veiculos/{id}")

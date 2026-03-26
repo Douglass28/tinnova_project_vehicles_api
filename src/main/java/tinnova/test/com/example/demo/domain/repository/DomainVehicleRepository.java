@@ -1,6 +1,7 @@
 package tinnova.test.com.example.demo.domain.repository;
 
 import tinnova.test.com.example.demo.domain.entities.vehicle.Vehicle;
+import tinnova.test.com.example.demo.domain.entities.valueobject.VehicleBrandCount;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
@@ -15,4 +16,6 @@ public interface DomainVehicleRepository {
     Optional<Vehicle> findById(UUID id);
 
     List<Vehicle> findByFilters(String marca, Integer ano, String cor, BigDecimal minPreco, BigDecimal maxPreco);
+
+    List<VehicleBrandCount> countActiveVehiclesByBrand();
 }

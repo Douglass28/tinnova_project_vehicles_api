@@ -5,6 +5,7 @@ import org.springframework.data.jpa.domain.Specification;
 import lombok.RequiredArgsConstructor;
 import tinnova.test.com.example.demo.domain.repository.DomainVehicleRepository;
 import tinnova.test.com.example.demo.domain.entities.vehicle.Vehicle;
+import tinnova.test.com.example.demo.domain.entities.valueobject.VehicleBrandCount;
 import tinnova.test.com.example.demo.application.usecases.vehicle.create.VehicleMapper;
 import java.math.BigDecimal;
 import java.util.List;
@@ -71,6 +72,13 @@ public class PostgresVehicleRepository implements DomainVehicleRepository {
         }
 
         return vehicleMapper.toDomainList(vehicleRepository.findAll(specification));
+    }
+
+    @Override
+    public List<VehicleBrandCount> countActiveVehiclesByBrand() {
+        return vehicleRepository.countActiveVehiclesByBrand().stream()
+            .map(result -> new VehicleBrandCount(result.getBrand(), result.getCount()))
+            .toList();
     }
 
 }
