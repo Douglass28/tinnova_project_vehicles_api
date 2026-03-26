@@ -22,6 +22,7 @@ public class VehicleMapper {
         entity.setColor(domain.getColor());
         entity.setPrice(domain.getPrice());
         entity.setType(domain.getType());
+        entity.setStatus(domain.getStatus());
         entity.setCreatedAt(domain.getCreatedAt());
         entity.setUpdatedAt(domain.getUpdatedAt());
 
@@ -39,7 +40,7 @@ public class VehicleMapper {
             .price(entity.getPrice())
             .type(entity.getType())
             .build();
-        return Vehicle.rebuild(entity.getId(), entity.getCreatedAt(), entity.getUpdatedAt(), vehicleData);
+        return Vehicle.rebuild(entity.getId(), entity.getCreatedAt(), entity.getUpdatedAt(), entity.getStatus(), vehicleData);
     }
 
     public List<Vehicle> toDomainList(List<VehicleEntity> entities) {

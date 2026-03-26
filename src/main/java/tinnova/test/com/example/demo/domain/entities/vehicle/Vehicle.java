@@ -53,7 +53,7 @@ public class Vehicle {
 		
 	}
 
-	public static Vehicle rebuild(UUID id, LocalDateTime createdAt, LocalDateTime updatedAt, VehicleData vehicleData) {
+	public static Vehicle rebuild(UUID id, LocalDateTime createdAt, LocalDateTime updatedAt, VehicleStatus status, VehicleData vehicleData) {
 		Vehicle vehicle = Vehicle.builder()
 			.id(id)
 			.chassis(vehicleData.getChassis())
@@ -64,6 +64,7 @@ public class Vehicle {
 			.color(vehicleData.getColor())
 			.price(vehicleData.getPrice())
 			.type(vehicleData.getType())
+			.status(status)
 			.createdAt(createdAt)
 			.updatedAt(updatedAt)
 			.build();	
