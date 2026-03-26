@@ -16,9 +16,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.UuidGenerator;
 import tinnova.test.com.example.demo.application.persistence.vehicles.enums.VehicleStatus;
 import tinnova.test.com.example.demo.application.persistence.vehicles.enums.VehicleType;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "vehicles")
@@ -29,7 +31,6 @@ import tinnova.test.com.example.demo.application.persistence.vehicles.enums.Vehi
 public class VehicleEntity {
 
 	@Id
-	@UuidGenerator
 	private UUID id;
 
 	@NotBlank
@@ -76,4 +77,12 @@ public class VehicleEntity {
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, length = 32)
 	private VehicleStatus status = VehicleStatus.ACTIVE;
+
+	@CreationTimestamp
+    @Column(name = "createdAt", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "updatedAt", nullable = false)
+    private LocalDateTime updatedAt;
 }
