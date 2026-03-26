@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 import tinnova.test.com.example.demo.application.usecases.vehicle.create.CreateVehicleResponse;
@@ -25,13 +26,15 @@ public interface VehicleApi {
     @ResponseStatus(HttpStatus.CREATED)
     ResponseEntity<CreateVehicleResponse> createVehicle(@RequestBody CreateVehicleRequest request);
 
-    @Operation(summary = "Listar veículos", description = "Retorna todos os veículos")
+    @Operation(summary = "Listar veículos", description = "Retorna todos os veículos com filtros opcionais")
     @GetMapping("/veiculos")
     @ResponseStatus(HttpStatus.OK)
     ResponseEntity<List<RetrieveVehicleByFiltersResponse>> retrieveVehicles(
         @RequestParam(required = false) String marca,
         @RequestParam(required = false) Integer ano,
-        @RequestParam(required = false) String cor
+        @RequestParam(required = false) String cor,
+        @RequestParam(required = false) BigDecimal minPreco,
+        @RequestParam(required = false) BigDecimal maxPreco
     );
 
     @Operation(summary = "Buscar veículo por ID", description = "Retorna os dados de um veículo pelo seu ID")

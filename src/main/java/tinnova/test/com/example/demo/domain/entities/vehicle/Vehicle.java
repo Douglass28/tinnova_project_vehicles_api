@@ -100,4 +100,12 @@ public class Vehicle {
 	private void markUpdated() {
         this.updatedAt = LocalDateTime.now();
     }
+
+	public static void validatePriceRange(BigDecimal minPrice, BigDecimal maxPrice) {
+		if (minPrice != null && maxPrice != null && minPrice.compareTo(maxPrice) > 0) {
+			throw new BusinessException(
+				"Faixa de preço inválida",
+				List.of("O valor de minPreco não pode ser maior que maxPreco"));
+		}
+	}
 }

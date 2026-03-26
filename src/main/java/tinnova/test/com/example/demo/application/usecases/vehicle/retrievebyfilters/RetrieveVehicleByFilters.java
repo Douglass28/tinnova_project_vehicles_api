@@ -18,7 +18,15 @@ public class RetrieveVehicleByFilters implements RetrieveVehicleByFiltersUseCase
 
     @Override
     public List<RetrieveVehicleByFiltersResponse> execute(RetrieveVehicleByFiltersInput input) {
-        List<Vehicle> vehicles = vehicleRepository.findByFilters(input.getMarca(), input.getAno(), input.getCor());
+        Vehicle.validatePriceRange(input.getMinPreco(), input.getMaxPreco());
+
+        List<Vehicle> vehicles = vehicleRepository.findByFilters(
+            input.getMarca(),
+            input.getAno(),
+            input.getCor(),
+            input.getMinPreco(),
+            input.getMaxPreco()
+        );
         log.info("Veiculos recuperados por filtro com sucesso: {}", vehicles.size());
         return OutputMapper.toResponseList(vehicles);
     }

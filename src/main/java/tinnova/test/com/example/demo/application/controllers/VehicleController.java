@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -39,12 +40,17 @@ public class VehicleController implements VehicleApi {
     public ResponseEntity<List<RetrieveVehicleByFiltersResponse>> retrieveVehicles(
         @RequestParam(required = false) String marca,
         @RequestParam(required = false) Integer ano,
-        @RequestParam(required = false) String cor) {
+        @RequestParam(required = false) String cor,
+        @RequestParam(required = false) BigDecimal minPreco,
+        @RequestParam(required = false) BigDecimal maxPreco
+    ) {
             
         RetrieveVehicleByFiltersInput input = RetrieveVehicleByFiltersInput.builder()
             .marca(marca)
             .ano(ano)
             .cor(cor)
+            .minPreco(minPreco)
+            .maxPreco(maxPreco)
             .build();
         return ResponseEntity.ok(retrieveVehicleByFiltersUseCase.execute(input));
     }

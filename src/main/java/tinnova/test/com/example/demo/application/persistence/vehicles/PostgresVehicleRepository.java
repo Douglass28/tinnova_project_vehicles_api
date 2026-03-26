@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import tinnova.test.com.example.demo.domain.repository.DomainVehicleRepository;
 import tinnova.test.com.example.demo.domain.entities.vehicle.Vehicle;
 import tinnova.test.com.example.demo.application.usecases.vehicle.create.VehicleMapper;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -36,7 +37,7 @@ public class PostgresVehicleRepository implements DomainVehicleRepository {
     }
 
     @Override
-    public List<Vehicle> findByFilters(String marca, Integer ano, String cor) {
+    public List<Vehicle> findByFilters(String marca, Integer ano, String cor, BigDecimal minPreco, BigDecimal maxPreco) {
         Specification<VehicleEntity> specification = (root, query, cb) -> cb.conjunction();
 
         if (StringUtils.hasText(marca)) {
@@ -54,6 +55,18 @@ public class PostgresVehicleRepository implements DomainVehicleRepository {
         if (StringUtils.hasText(cor)) {
             specification = specification.and((root, query, cb) ->
                 cb.equal(cb.lower(root.get("color")), cor.trim().toLowerCase())
+            );
+        }
+
+        if (minPreco != null) {
+            specification = specification.and((root, query, cb) ->
+                cb.greaterThanOrEqualTo(root.get("price"), minPreco)
+            );
+        }
+
+        if (maxPreco != null) {
+            specification = specification.and((root, query, cb) ->
+                cb.lessThanOrEqualTo(root.get("price"), maxPreco)
             );
         }
 
