@@ -12,4 +12,6 @@ public interface DomainVehicleRepository {
     List<Vehicle> findAll();
 
     Optional<Vehicle> findById(UUID id);
+
+    List<Vehicle> findByFilters(String marca, Integer ano, String cor);
 }
