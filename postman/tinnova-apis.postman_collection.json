@@ -1,1 +1,315 @@
-
+{
+	"info": {
+		"_postman_id": "10d8c03f-c707-441e-ac0e-b193dd9c29a5",
+		"name": "tinnova-apis",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21372564",
+		"_collection_link": "https://orange-flare-337812.postman.co/workspace/tinnova-api-manager-vehicles~b46cd3ae-72e1-402c-879c-a35188519e5f/collection/21372564-10d8c03f-c707-441e-ac0e-b193dd9c29a5?action=share&source=collection_link&creator=21372564"
+	},
+	"item": [
+		{
+			"name": "tinnova-auth-login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"user\",\n    \"password\": \"user123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"login"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST http://localhost:8080/api/v1/auth/login \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"username\":\"admin\",\"password\":\"admin123\"}'"
+			},
+			"response": []
+		},
+		{
+			"name": "create-vehicle-api",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX0FETUlOIl0sInN1YiI6ImFkbWluIiwiaWF0IjoxNzc0NTMyNjQ3LCJleHAiOjE3NzQ1MzYyNDd9.1stqhaXi4Wog-5r6uJlPw7TobYHRC46YOg7ecl4ENk8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"chassis\": \"80755678901234590\",\n  \"plate\": \"AJJ1023\",\n  \"brand\": \"toyota\",\n  \"model\": \"corolla\",\n  \"year\": 2024,\n  \"color\": \"cinza\",\n  \"price\": 168000,\n  \"type\": \"CAR\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/veiculos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"veiculos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update-vehicle-api",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX0FETUlOIl0sInN1YiI6ImFkbWluIiwiaWF0IjoxNzc0NTI2ODM0LCJleHAiOjE3NzQ1MzA0MzR9.1nJdXXbTJa6VHqxeD2LyTDR5PujX5psFOwdpfE3qfx0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"chassis\": \"00026678901234590\",\n  \"plate\": \"GGG1023\",\n  \"brand\": \"toyota\",\n  \"model\": \"aris\",\n  \"year\": 2020,\n  \"color\": \"roxo\",\n  \"price\": 140000,\n  \"type\": \"CAR\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/veiculos/66070f1a-06d3-4bd2-8676-b2fec686b288",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"veiculos",
+						"66070f1a-06d3-4bd2-8676-b2fec686b288"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update-parcial-vehicle-api",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX0FETUlOIl0sInN1YiI6ImFkbWluIiwiaWF0IjoxNzc0NTI5MDkwLCJleHAiOjE3NzQ1MzI2OTB9.QTFH0GxH1kWfJzB69WronykiVk8ZV3vmTdBI9ddI8JE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"brand\": \"hyundai\",\n  \"price\": 180000.00\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/veiculos/66070f1a-06d3-4bd2-8676-b2fec686b288",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"veiculos",
+						"66070f1a-06d3-4bd2-8676-b2fec686b288"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "retrieve-vehicle-by-id-api",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiXSwic3ViIjoidXNlciIsImlhdCI6MTc3NDUyMDg5NCwiZXhwIjoxNzc0NTI0NDk0fQ.06f1EnWMxQkKxwnmfAPL6TMi9z9YIE4z1iT_CWzFdDg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/veiculos/7af0aadb-28be-46b7-a4b3-028fe48074",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"veiculos",
+						"7af0aadb-28be-46b7-a4b3-028fe48074"
+					],
+					"query": [
+						{
+							"key": "Authorization",
+							"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX0FETUlOIl0sInN1YiI6ImFkbWluIiwiaWF0IjoxNzc0NDkwMDUwLCJleHAiOjE3NzQ0OTM2NTB9.DiMh9A1G5aADuHUGIT0MnVxpr7ZA8dx2kFtrv_Vo1rM",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "retrieve-vehicle-report-by-brand",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX0FETUlOIl0sInN1YiI6ImFkbWluIiwiaWF0IjoxNzc0NTMyNjQ3LCJleHAiOjE3NzQ1MzYyNDd9.1stqhaXi4Wog-5r6uJlPw7TobYHRC46YOg7ecl4ENk8",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/veiculos/relatorios/por-marca",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"veiculos",
+						"relatorios",
+						"por-marca"
+					],
+					"query": [
+						{
+							"key": "Authorization",
+							"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX0FETUlOIl0sInN1YiI6ImFkbWluIiwiaWF0IjoxNzc0NDkwMDUwLCJleHAiOjE3NzQ0OTM2NTB9.DiMh9A1G5aADuHUGIT0MnVxpr7ZA8dx2kFtrv_Vo1rM",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete-vehicle-by-id-api",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX0FETUlOIl0sInN1YiI6ImFkbWluIiwiaWF0IjoxNzc0NTMwNDM1LCJleHAiOjE3NzQ1MzQwMzV9.xymCk-6nAuoiMdrhqfuM3fV0FVrTAN5Bh62__tyhYM4",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/veiculos/66070f1a-06d3-4bd2-8676-b2fec686b288",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"veiculos",
+						"66070f1a-06d3-4bd2-8676-b2fec686b288"
+					],
+					"query": [
+						{
+							"key": "Authorization",
+							"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX0FETUlOIl0sInN1YiI6ImFkbWluIiwiaWF0IjoxNzc0NDkwMDUwLCJleHAiOjE3NzQ0OTM2NTB9.DiMh9A1G5aADuHUGIT0MnVxpr7ZA8dx2kFtrv_Vo1rM",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "retrieve-vehicle-by-filters-api",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX0FETUlOIl0sInN1YiI6ImFkbWluIiwiaWF0IjoxNzc0NTI0NzczLCJleHAiOjE3NzQ1MjgzNzN9.Y2Hqi-oPCfGUe5oKKjY6EHaH826ie1WjTa9jM9DcVWk",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/veiculos?cor=amarelo&minPreco=2000.00&maxPreco=5000.00",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"veiculos"
+					],
+					"query": [
+						{
+							"key": "marca",
+							"value": "Ford",
+							"disabled": true
+						},
+						{
+							"key": "ano",
+							"value": "2020",
+							"disabled": true
+						},
+						{
+							"key": "cor",
+							"value": "amarelo"
+						},
+						{
+							"key": "minPreco",
+							"value": "2000.00"
+						},
+						{
+							"key": "maxPreco",
+							"value": "5000.00"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
