@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,7 @@ import tinnova.test.com.example.demo.application.usecases.vehicle.create.CreateV
 import tinnova.test.com.example.demo.application.usecases.vehicle.create.CreateVehicleRequest;
 import tinnova.test.com.example.demo.application.usecases.vehicle.retrievebyfilters.RetrieveVehicleByFiltersResponse;
 import tinnova.test.com.example.demo.application.usecases.vehicle.retrievebyid.RetrieveVehicleByIdResponse;
+import tinnova.test.com.example.demo.application.usecases.vehicle.patch.PatchVehicleRequest;
 import tinnova.test.com.example.demo.application.usecases.vehicle.update.UpdateVehicleRequest;
 import tinnova.test.com.example.demo.application.usecases.vehicle.update.UpdateVehicleResponse;
 
@@ -49,5 +51,10 @@ public interface VehicleApi {
     @PutMapping("/veiculos/{id}")
     @ResponseStatus(HttpStatus.OK)
     ResponseEntity<UpdateVehicleResponse> updateVehicle(@PathVariable UUID id, @RequestBody UpdateVehicleRequest request);
+
+    @Operation(summary = "Atualizar parcialmente veículo", description = "Atualiza parcialmente os dados de um veículo existente")
+    @PatchMapping("/veiculos/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    ResponseEntity<Void> patchVehicle(@PathVariable UUID id, @RequestBody PatchVehicleRequest request);
 
 }

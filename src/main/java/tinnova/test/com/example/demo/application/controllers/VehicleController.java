@@ -11,6 +11,8 @@ import tinnova.test.com.example.demo.application.usecases.vehicle.retrievebyfilt
 import tinnova.test.com.example.demo.application.usecases.vehicle.retrievebyfilters.RetrieveVehicleByFiltersUseCase;
 import tinnova.test.com.example.demo.application.usecases.vehicle.retrievebyid.RetrieveVehicleByIdUseCase;
 import tinnova.test.com.example.demo.application.usecases.vehicle.retrievebyid.RetrieveVehicleByIdResponse;
+import tinnova.test.com.example.demo.application.usecases.vehicle.patch.PatchVehicleRequest;
+import tinnova.test.com.example.demo.application.usecases.vehicle.patch.PatchVehicleUseCase;
 import tinnova.test.com.example.demo.application.usecases.vehicle.update.UpdateVehicleRequest;
 import tinnova.test.com.example.demo.application.usecases.vehicle.update.UpdateVehicleResponse;
 import tinnova.test.com.example.demo.application.usecases.vehicle.update.UpdateVehicleUseCase;
@@ -34,6 +36,7 @@ public class VehicleController implements VehicleApi {
     private final RetrieveVehicleByFiltersUseCase retrieveVehicleByFiltersUseCase;
     private final RetrieveVehicleByIdUseCase retrieveVehicleByIdUseCase;
     private final UpdateVehicleUseCase updateVehicleUseCase;
+    private final PatchVehicleUseCase patchVehicleUseCase;
 
     @Override
     public ResponseEntity<CreateVehicleResponse> createVehicle(@RequestBody CreateVehicleRequest request) {
@@ -67,6 +70,12 @@ public class VehicleController implements VehicleApi {
     @Override
     public ResponseEntity<UpdateVehicleResponse> updateVehicle(UUID id, @RequestBody UpdateVehicleRequest request) {
         return ResponseEntity.ok(updateVehicleUseCase.execute(request.toInput(id)));
+    }
+
+    @Override
+    public ResponseEntity<Void> patchVehicle(UUID id, @RequestBody PatchVehicleRequest request) {
+        patchVehicleUseCase.execute(request.toInput(id));
+        return ResponseEntity.noContent().build();
     }
 
 }
