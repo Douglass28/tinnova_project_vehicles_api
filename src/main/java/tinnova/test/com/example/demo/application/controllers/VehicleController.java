@@ -58,8 +58,7 @@ public class VehicleController implements VehicleApi {
         @RequestParam(required = false) String cor,
         @RequestParam(required = false) BigDecimal minPreco,
         @RequestParam(required = false) BigDecimal maxPreco,
-        @PageableDefault(size = 20, sort = "brand") Pageable pageable
-    ) {
+        @PageableDefault(size = 20, sort = "brand") Pageable pageable) {
         RetrieveVehicleByFiltersInput input = RetrieveVehicleByFiltersInput.builder()
             .marca(marca)
             .ano(ano)
@@ -78,8 +77,7 @@ public class VehicleController implements VehicleApi {
 
     @Override
     public ResponseEntity<Page<RetrieveVehiclesByBrandReportResponse>> retrieveVehiclesByBrandReport(
-        @PageableDefault(size = 20, sort = "brand") Pageable pageable
-    ) {
+        @PageableDefault(size = 20, sort = "brand") Pageable pageable) {
         RetrieveVehiclesByBrandReportInput input = RetrieveVehiclesByBrandReportInput.builder()
             .pageable(pageable)
             .build();

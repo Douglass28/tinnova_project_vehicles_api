@@ -34,7 +34,7 @@ public class CreateVehicleResponse {
 	@Schema(description = "Cor do veículo", example = "Azul")
 	private String color;
 
-	@Schema(description = "Preço do veículo", example = "10000.00")
+	@Schema(description = "Preco do veiculo persistido em USD", example = "1900.00")
 	private BigDecimal price;
 
 	@Schema(description = "Tipo do veículo", example = "CAR")

@@ -47,7 +47,7 @@ public class CreateVehicleRequest {
     private String color;
 
     @NotNull
-    @Schema(description = "Preço do veículo", example = "10000.00")
+    @Schema(description = "Preco do veiculo em BRL (sera convertido e persistido em USD)", example = "10000.00")
     @Positive
     private BigDecimal price;
 

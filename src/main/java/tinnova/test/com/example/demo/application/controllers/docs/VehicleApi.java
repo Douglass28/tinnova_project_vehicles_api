@@ -37,7 +37,6 @@ public interface VehicleApi {
     @Operation(summary = "Listar veículos", description = "Retorna todos os veículos com filtros opcionais")
     @GetMapping("/veiculos")
     @ResponseStatus(HttpStatus.OK)
-    // Padrão para endpoints de consulta: usar Pageable nativo (page,size,sort).
     ResponseEntity<Page<RetrieveVehicleByFiltersResponse>> retrieveVehicles(
         @RequestParam(required = false) String marca,
         @RequestParam(required = false) Integer ano,
