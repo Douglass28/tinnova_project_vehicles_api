@@ -11,6 +11,9 @@ import tinnova.test.com.example.demo.application.usecases.vehicle.retrievebyfilt
 import tinnova.test.com.example.demo.application.usecases.vehicle.retrievebyfilters.RetrieveVehicleByFiltersUseCase;
 import tinnova.test.com.example.demo.application.usecases.vehicle.retrievebyid.RetrieveVehicleByIdUseCase;
 import tinnova.test.com.example.demo.application.usecases.vehicle.retrievebyid.RetrieveVehicleByIdResponse;
+import tinnova.test.com.example.demo.application.usecases.vehicle.update.UpdateVehicleRequest;
+import tinnova.test.com.example.demo.application.usecases.vehicle.update.UpdateVehicleResponse;
+import tinnova.test.com.example.demo.application.usecases.vehicle.update.UpdateVehicleUseCase;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +33,7 @@ public class VehicleController implements VehicleApi {
     private final CreateVehicleUseCase createVehicleUseCase;
     private final RetrieveVehicleByFiltersUseCase retrieveVehicleByFiltersUseCase;
     private final RetrieveVehicleByIdUseCase retrieveVehicleByIdUseCase;
+    private final UpdateVehicleUseCase updateVehicleUseCase;
 
     @Override
     public ResponseEntity<CreateVehicleResponse> createVehicle(@RequestBody CreateVehicleRequest request) {
@@ -58,6 +62,11 @@ public class VehicleController implements VehicleApi {
     @Override
     public ResponseEntity<RetrieveVehicleByIdResponse> retrieveVehicleById(UUID id) {
         return ResponseEntity.ok(retrieveVehicleByIdUseCase.execute(id));
+    }
+
+    @Override
+    public ResponseEntity<UpdateVehicleResponse> updateVehicle(UUID id, @RequestBody UpdateVehicleRequest request) {
+        return ResponseEntity.ok(updateVehicleUseCase.execute(request.toInput(id)));
     }
 
 }

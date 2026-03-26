@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -17,6 +18,8 @@ import tinnova.test.com.example.demo.application.usecases.vehicle.create.CreateV
 import tinnova.test.com.example.demo.application.usecases.vehicle.create.CreateVehicleRequest;
 import tinnova.test.com.example.demo.application.usecases.vehicle.retrievebyfilters.RetrieveVehicleByFiltersResponse;
 import tinnova.test.com.example.demo.application.usecases.vehicle.retrievebyid.RetrieveVehicleByIdResponse;
+import tinnova.test.com.example.demo.application.usecases.vehicle.update.UpdateVehicleRequest;
+import tinnova.test.com.example.demo.application.usecases.vehicle.update.UpdateVehicleResponse;
 
 @Tag(name = "Veículos", description = "Endpoints relacionados à gestão de veículos.")
 public interface VehicleApi {
@@ -41,5 +44,10 @@ public interface VehicleApi {
     @GetMapping("/veiculos/{id}")
     @ResponseStatus(HttpStatus.OK)
     ResponseEntity<RetrieveVehicleByIdResponse> retrieveVehicleById(@PathVariable UUID id);
+
+    @Operation(summary = "Atualizar veículo", description = "Atualiza os dados de um veículo existente")
+    @PutMapping("/veiculos/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    ResponseEntity<UpdateVehicleResponse> updateVehicle(@PathVariable UUID id, @RequestBody UpdateVehicleRequest request);
 
 }

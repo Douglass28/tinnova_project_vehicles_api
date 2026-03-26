@@ -88,7 +88,7 @@ public class Vehicle {
 		this.status = VehicleStatus.DELETED;
 		this.markUpdated();
 	}
-
+	
 	private static void selfValidate(Vehicle vehicle) {
         ValidationResult result = VALIDATOR.validate(vehicle);
         if (!result.isValid()) {
