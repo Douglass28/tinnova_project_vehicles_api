@@ -57,7 +57,6 @@ public class DollarApiIntegration implements IDollarApiIntegration {
     }
 
     private BigDecimal fetchAwesomeRate() {
-        log.info("Nào preciso fazer uma nova chamada para a AwesomeAPI, pois a cotacao esta no cache");
         AwesomeUsdBrlResponse response = restClient.get()
             .uri(awesomeUrl)
             .retrieve()

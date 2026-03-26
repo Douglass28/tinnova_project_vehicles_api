@@ -15,7 +15,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<Map<String, Object>> handleDataIntegrity(DataIntegrityViolationException ex) {
-        String message = "Violação de integridade de dados";
+        String message = "Violação de integridade de dados, já existe veículo com este chassis";
         Throwable root = NestedExceptionUtils.getMostSpecificCause(ex);
         if (root != null && root.getMessage() != null && root.getMessage().contains("chassis")) {
             message = "Já existe veículo com este chassis";
