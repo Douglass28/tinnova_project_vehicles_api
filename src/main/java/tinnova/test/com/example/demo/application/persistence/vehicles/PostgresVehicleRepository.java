@@ -6,6 +6,8 @@ import tinnova.test.com.example.demo.domain.repository.DomainVehicleRepository;
 import tinnova.test.com.example.demo.domain.entities.vehicle.Vehicle;
 import tinnova.test.com.example.demo.application.usecases.vehicle.create.VehicleMapper;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 @RequiredArgsConstructor
@@ -24,6 +26,11 @@ public class PostgresVehicleRepository implements DomainVehicleRepository {
     @Override
     public List<Vehicle> findAll() {
         return vehicleMapper.toDomainList(vehicleRepository.findAll());
+    }
+
+    @Override
+    public Optional<Vehicle> findById(UUID id) {
+        return vehicleRepository.findById(id).map(vehicleMapper::toDomain);
     }
 
 }
