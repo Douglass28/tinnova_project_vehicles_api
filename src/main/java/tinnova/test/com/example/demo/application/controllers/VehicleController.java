@@ -25,9 +25,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.UUID;
+import tinnova.test.com.example.demo.application.usecases.vehicle.reportbybrand.RetrieveVehiclesByBrandReportInput;
 
 @Slf4j
 @RestController
@@ -49,20 +52,21 @@ public class VehicleController implements VehicleApi {
     }
 
     @Override
-    public ResponseEntity<List<RetrieveVehicleByFiltersResponse>> retrieveVehicles(
+    public ResponseEntity<Page<RetrieveVehicleByFiltersResponse>> retrieveVehicles(
         @RequestParam(required = false) String marca,
         @RequestParam(required = false) Integer ano,
         @RequestParam(required = false) String cor,
         @RequestParam(required = false) BigDecimal minPreco,
-        @RequestParam(required = false) BigDecimal maxPreco
+        @RequestParam(required = false) BigDecimal maxPreco,
+        @PageableDefault(size = 20, sort = "brand") Pageable pageable
     ) {
-            
         RetrieveVehicleByFiltersInput input = RetrieveVehicleByFiltersInput.builder()
             .marca(marca)
             .ano(ano)
             .cor(cor)
             .minPreco(minPreco)
             .maxPreco(maxPreco)
+            .pageable(pageable)
             .build();
         return ResponseEntity.ok(retrieveVehicleByFiltersUseCase.execute(input));
     }
@@ -73,8 +77,13 @@ public class VehicleController implements VehicleApi {
     }
 
     @Override
-    public ResponseEntity<List<RetrieveVehiclesByBrandReportResponse>> retrieveVehiclesByBrandReport() {
-        return ResponseEntity.ok(retrieveVehiclesByBrandReportUseCase.execute(null));
+    public ResponseEntity<Page<RetrieveVehiclesByBrandReportResponse>> retrieveVehiclesByBrandReport(
+        @PageableDefault(size = 20, sort = "brand") Pageable pageable
+    ) {
+        RetrieveVehiclesByBrandReportInput input = RetrieveVehiclesByBrandReportInput.builder()
+            .pageable(pageable)
+            .build();
+        return ResponseEntity.ok(retrieveVehiclesByBrandReportUseCase.execute(input));
     }
 
     @Override
@@ -93,5 +102,4 @@ public class VehicleController implements VehicleApi {
         deleteVehicleUseCase.execute(id);
         return ResponseEntity.noContent().build();
     }
-
 }

@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.UUID;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import tinnova.test.com.example.demo.application.usecases.vehicle.create.CreateVehicleResponse;
 import tinnova.test.com.example.demo.application.usecases.vehicle.create.CreateVehicleRequest;
 import tinnova.test.com.example.demo.application.usecases.vehicle.retrievebyfilters.RetrieveVehicleByFiltersResponse;
@@ -36,12 +37,14 @@ public interface VehicleApi {
     @Operation(summary = "Listar veículos", description = "Retorna todos os veículos com filtros opcionais")
     @GetMapping("/veiculos")
     @ResponseStatus(HttpStatus.OK)
-    ResponseEntity<List<RetrieveVehicleByFiltersResponse>> retrieveVehicles(
+    // Padrão para endpoints de consulta: usar Pageable nativo (page,size,sort).
+    ResponseEntity<Page<RetrieveVehicleByFiltersResponse>> retrieveVehicles(
         @RequestParam(required = false) String marca,
         @RequestParam(required = false) Integer ano,
         @RequestParam(required = false) String cor,
         @RequestParam(required = false) BigDecimal minPreco,
-        @RequestParam(required = false) BigDecimal maxPreco
+        @RequestParam(required = false) BigDecimal maxPreco,
+        Pageable pageable
     );
 
     @Operation(summary = "Buscar veículo por ID", description = "Retorna os dados de um veículo pelo seu ID")
@@ -55,7 +58,7 @@ public interface VehicleApi {
     )
     @GetMapping("/veiculos/relatorios/por-marca")
     @ResponseStatus(HttpStatus.OK)
-    ResponseEntity<List<RetrieveVehiclesByBrandReportResponse>> retrieveVehiclesByBrandReport();
+    ResponseEntity<Page<RetrieveVehiclesByBrandReportResponse>> retrieveVehiclesByBrandReport(Pageable pageable);
 
     @Operation(summary = "Atualizar veículo", description = "Atualiza os dados de um veículo existente")
     @PutMapping("/veiculos/{id}")

@@ -1,6 +1,7 @@
 package tinnova.test.com.example.demo.application.usecases.vehicle.retrievebyfilters;
 
 import java.util.List;
+import org.springframework.data.domain.Page;
 import tinnova.test.com.example.demo.domain.entities.vehicle.Vehicle;
 
 public class OutputMapper {
@@ -24,5 +25,9 @@ public class OutputMapper {
 
     public static List<RetrieveVehicleByFiltersResponse> toResponseList(List<Vehicle> vehicles) {
         return vehicles.stream().map(OutputMapper::toResponse).toList();
+    }
+
+    public static Page<RetrieveVehicleByFiltersResponse> toResponsePage(Page<Vehicle> vehicles) {
+        return vehicles.map(OutputMapper::toResponse);
     }
 }

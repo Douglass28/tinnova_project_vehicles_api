@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface DomainVehicleRepository {
     
@@ -15,7 +17,14 @@ public interface DomainVehicleRepository {
 
     Optional<Vehicle> findById(UUID id);
 
-    List<Vehicle> findByFilters(String marca, Integer ano, String cor, BigDecimal minPreco, BigDecimal maxPreco);
+    Page<Vehicle> findByFilters(
+        String marca,
+        Integer ano,
+        String cor,
+        BigDecimal minPreco,
+        BigDecimal maxPreco,
+        Pageable pageable
+    );
 
-    List<VehicleBrandCount> countActiveVehiclesByBrand();
+    Page<VehicleBrandCount> countActiveVehiclesByBrand(Pageable pageable);
 }

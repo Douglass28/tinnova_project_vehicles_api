@@ -1,9 +1,9 @@
 package tinnova.test.com.example.demo.application.usecases.vehicle.reportbybrand;
 
 import jakarta.transaction.Transactional;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import tinnova.test.com.example.demo.domain.entities.valueobject.VehicleBrandCount;
 import tinnova.test.com.example.demo.domain.repository.DomainVehicleRepository;
@@ -17,9 +17,9 @@ public class RetrieveVehiclesByBrandReport implements RetrieveVehiclesByBrandRep
     private final DomainVehicleRepository vehicleRepository;
 
     @Override
-    public List<RetrieveVehiclesByBrandReportResponse> execute(Void input) {
-        List<VehicleBrandCount> report = vehicleRepository.countActiveVehiclesByBrand();
-        log.info("Relatório por marca gerado com sucesso: {} linhas", report.size());
-        return OutputMapper.toResponseList(report);
+    public Page<RetrieveVehiclesByBrandReportResponse> execute(RetrieveVehiclesByBrandReportInput input) {
+        Page<VehicleBrandCount> report = vehicleRepository.countActiveVehiclesByBrand(input.getPageable());
+        log.info("Relatório por marca gerado com sucesso: {} linhas", report.getNumberOfElements());
+        return OutputMapper.toResponsePage(report);
     }
 }

@@ -2,6 +2,8 @@ package tinnova.test.com.example.demo.application.persistence.vehicles;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import lombok.RequiredArgsConstructor;
 import tinnova.test.com.example.demo.domain.repository.DomainVehicleRepository;
 import tinnova.test.com.example.demo.domain.entities.vehicle.Vehicle;
@@ -38,7 +40,14 @@ public class PostgresVehicleRepository implements DomainVehicleRepository {
     }
 
     @Override
-    public List<Vehicle> findByFilters(String marca, Integer ano, String cor, BigDecimal minPreco, BigDecimal maxPreco) {
+    public Page<Vehicle> findByFilters(
+        String marca,
+        Integer ano,
+        String cor,
+        BigDecimal minPreco,
+        BigDecimal maxPreco,
+        Pageable pageable
+    ) {
         Specification<VehicleEntity> specification = (root, query, cb) -> cb.conjunction();
 
         if (StringUtils.hasText(marca)) {
@@ -71,14 +80,13 @@ public class PostgresVehicleRepository implements DomainVehicleRepository {
             );
         }
 
-        return vehicleMapper.toDomainList(vehicleRepository.findAll(specification));
+        return vehicleRepository.findAll(specification, pageable).map(vehicleMapper::toDomain);
     }
 
     @Override
-    public List<VehicleBrandCount> countActiveVehiclesByBrand() {
-        return vehicleRepository.countActiveVehiclesByBrand().stream()
-            .map(result -> new VehicleBrandCount(result.getBrand(), result.getCount()))
-            .toList();
+    public Page<VehicleBrandCount> countActiveVehiclesByBrand(Pageable pageable) {
+        return vehicleRepository.countActiveVehiclesByBrand(pageable)
+            .map(result -> new VehicleBrandCount(result.getBrand(), result.getCount()));
     }
 
 }
