@@ -30,7 +30,13 @@ Todos usam:
 Rodar apenas testes de integração de use cases:
 
 ```bash
-./mvnw -Dtest=CreateAndRetrieveVehicleUseCaseIT,VehicleMutationUseCaseIT,VehicleQueryUseCaseIT test
+./mvnw -Dtest=CreateVehicleTest,DeleteVehicleTest,PatchVehicleTest,RetrieveVehiclesByBrandReportTest,RetrieveVehicleTest,RetrieveVehicleByFiltersTest,RetrieveVehicleByIdTest,UpdateVehicleTest test
+```
+
+Rodar testes de integração do controller:
+
+```bash
+./mvnw -Dtest=VehicleControllerReadIT,VehicleControllerWriteIT,VehicleControllerSecurityIT test
 ```
 
 Rodar suíte completa:
